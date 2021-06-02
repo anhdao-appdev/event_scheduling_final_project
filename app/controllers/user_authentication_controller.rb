@@ -19,7 +19,7 @@ class UserAuthenticationController < ApplicationController
       else
         session[:user_id] = user.id
       
-        redirect_to("/", { :notice => "Signed in successfully." })
+        redirect_to("/user_home", { :notice => "Signed in successfully." })
       end
     else
       redirect_to("/user_sign_in", { :alert => "No user with that email address." })
@@ -40,10 +40,8 @@ class UserAuthenticationController < ApplicationController
     @user = User.new
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
-    @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.first_name = params.fetch("query_first_name")
     @user.last_name = params.fetch("query_last_name")
-    @user.company_id = params.fetch("query_company_id")
     @user.venmo = params.fetch("query_venmo")
     @user.year = params.fetch("query_year")
 
@@ -52,7 +50,7 @@ class UserAuthenticationController < ApplicationController
     if save_status == true
       session[:user_id] = @user.id
    
-      redirect_to("/", { :notice => "User account created successfully."})
+      redirect_to("/user_home", { :notice => "User account created successfully."})
     else
       redirect_to("/user_sign_up", { :alert => "User account failed to create successfully."})
     end
@@ -66,10 +64,8 @@ class UserAuthenticationController < ApplicationController
     @user = @current_user
     @user.email = params.fetch("query_email")
     @user.password = params.fetch("query_password")
-    @user.password_confirmation = params.fetch("query_password_confirmation")
     @user.first_name = params.fetch("query_first_name")
     @user.last_name = params.fetch("query_last_name")
-    @user.company_id = params.fetch("query_company_id")
     @user.venmo = params.fetch("query_venmo")
     @user.year = params.fetch("query_year")
     

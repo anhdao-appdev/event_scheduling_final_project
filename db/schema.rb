@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_232825) do
+ActiveRecord::Schema.define(version: 2021_06_02_214244) do
 
   create_table "events", force: :cascade do |t|
     t.datetime "time"
@@ -35,11 +35,10 @@ ActiveRecord::Schema.define(version: 2021_05_31_232825) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
-    t.integer "company_id"
     t.string "venmo"
-    t.integer "year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "year"
   end
 
 end

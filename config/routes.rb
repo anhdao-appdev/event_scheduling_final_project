@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-
+  # Homepage
+  get("/",{:controller => "user_authentication", :action => "sign_up_form"})
 
   # Routes for the Participant resource:
 
