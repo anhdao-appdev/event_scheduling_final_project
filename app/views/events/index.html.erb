@@ -3,13 +3,11 @@
 <hr>
 
 <div>
-  <div>
-    <h2>
-      Add a new event
-    </h2>
-
-    <form action="/insert_event" method="post">
   
+  <h2><i>Add a New Event</i></h2>
+
+  <form action="/insert_event" method="post">
+
     <div class="form-group row">
       <div class="form-group col-md-3">
         <input type="text" class="form-control" id="name" name="query_name" placeholder="Time">
@@ -18,6 +16,7 @@
         <input type="datetime-local" class="form-control" id="time" name="query_time" placeholder="Time">
       </div>
     </div>
+
     <div class="form-group row">
       <div class="form-group col-md-3">
         <input type="text" class="form-control" id="location" name="query_location" placeholder="Location">
@@ -26,61 +25,14 @@
         <input type="text" class="form-control" id="picture" name="query_picture" placeholder="Picture Link">
       </div>
     </div>
-  
+
     <div class="form-group col-md-6">
       <textarea class="form-control" row=3 id="description" name="query_description" placeholder="Description"></textarea>
     </div>
-    </div>
-    
+      
+    <br>
     <button type="submit" class="btn btn-primary">Create event</button>
   </form>
-
-    <form action="/insert_event" method="post">
-      <div>
-        <label for="time_box">
-          Time
-        </label>
-
-        <input type="datetime-local" id="time_box" name="query_time">
-      </div>
-
-      <div>
-        <label for="location_box">
-          Location
-        </label>
-
-        <input type="text" id="location_box" name="query_location">
-      </div>
-
-      <div>
-        <label for="picture_box">
-          Picture
-        </label>
-
-        <input type="text" id="picture_box" name="query_picture">
-      </div>
-
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="query_description">
-      </div>
-
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name">
-      </div>
-
-      <button>
-        Create event
-      </button>
-    </form>
-  </div>
 </div>
 
 <hr>

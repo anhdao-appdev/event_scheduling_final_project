@@ -1,132 +1,55 @@
-<div>
-  <div>
-    <h1>
-      Event #<%= @the_event.id %> details
-    </h1>
-
-    <div>
-      <div>
-        <a href="/events">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_event/<%= @the_event.id %>">
-          Delete event
-        </a>
-      </div>
-    </div>
-
-    <dl>
-      <dt>
-        Time
-      </dt>
-      <dd>
-        <%= @the_event.time %>
-      </dd>
-
-      <dt>
-        Location
-      </dt>
-      <dd>
-        <%= @the_event.location %>
-      </dd>
-
-      <dt>
-        Picture
-      </dt>
-      <dd>
-        <%= @the_event.picture %>
-      </dd>
-
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_event.description %>
-      </dd>
-
-      <dt>
-        Name
-      </dt>
-      <dd>
-        <%= @the_event.name %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_event.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_event.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
+<div class="card mb-3">
+<h3 class="card-header"><b><%= @the_event.name %></b></h3>
+<svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+  <image href="<%=@the_event.picture%>" x="0" y="0" height="100%" width="100%"/>
+</svg>
+<div class="card-body">
+  <p class="card-text"><%=@the_event.description %></p>
 </div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Time: <%=@the_event.time.strftime("%D %H:%M")%></li>
+  <li class="list-group-item">Location: <%=@the_event.location%></li>
+</ul>
+<div class="card-body">
+  <a href="/events" class="card-link" data-ol-has-click-handler="">Go back</a>
+  <a href="/delete_event/<%= @the_event.id %>" class="card-link" data-ol-has-click-handler="">Delete event</a>
+</div>
+<div class="card-footer text-muted">Created at <%= time_ago_in_words(@the_event.created_at) %> ago, updated at <%= time_ago_in_words(@the_event.updated_at) %> ago</div>
 
 <hr>
 
-
 <div>
-  <div>
-    <h2>
-      Edit event
-    </h2>
+  <h3><b>Edit event</b></h3>
 
-    <form action="/modify_event/<%= @the_event.id %>"  method="post" >
-      <div>
-        <label for="time_box">
-          Time
-        </label>
+  <form action="/modify_event/<%= @the_event.id %>"  method="post" >
 
-        <input type="datetime-local" id="time_box" name="query_time"
-         value="<%= @the_event.time %>">
-      </div>
-
-      <div>
-        <label for="location_box">
-          Location
-        </label>
-
-        <input type="text" id="location_box" name="query_location" value="<%= @the_event.location %>">
-      </div>
-
-      <div>
-        <label for="picture_box">
-          Picture
-        </label>
-
-        <input type="text" id="picture_box" name="query_picture" value="<%= @the_event.picture %>">
-      </div>
-
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="query_description" value="<%= @the_event.description %>">
-      </div>
-
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" value="<%= @the_event.name %>">
-      </div>
-
-      <button>
-        Update event
-      </button>
-    </form>
+  <div class="form-group row">
+    <div class="form-group col-md-4">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="query_name" value="<%= @the_event.name %>">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="time">Time</label>
+      <input type="datetime-local" class="form-control" id="time" name="query_time" value="<%= @the_event.time %>">
+    </div>
   </div>
-</div>
+  <div class="form-group row">
+    <div class="form-group col-md-4">
+      <label for="name">Location</label>
+      <input type="text" class="form-control" id="location" name="query_location" value="<%= @the_event.location %>">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="picture">Picture</label>
+      <input type="text" class="form-control" id="picture" name="query_picture" value="<%= @the_event.picture %>"
+    </div>
+  </div>
+  
+  <div class="form-group col-md-8">
+    <label for="description">Description</label>
+    <textarea class="form-control" row=3 id="description" name="query_description" value="<%= @the_event.description %>"></textarea>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary col-md-1">Edit event</button>
 
+</div>
 <hr>
