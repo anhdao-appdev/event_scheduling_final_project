@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   def index
     matching_events = Event.all
 
-    @list_of_events = matching_events.order({ :created_at => :desc })
+    @list_of_events = matching_events.order({ :time => :desc })
 
     render({ :template => "events/index.html.erb" })
   end
