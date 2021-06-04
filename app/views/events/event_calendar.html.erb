@@ -1,0 +1,28 @@
+<h1><b>Events Calendar</b></h1>
+
+<hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Hour</th>
+      <th scope="col">Event Name</th>
+      <th scope="col">Event Location</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @list_of_events.each do |an_event| %>
+      <tr class="table-dark">
+        <td><%= an_event.id %></td>
+        <td><%= an_event.time.strftime("%D") %></td>
+        <td><%= an_event.time.strftime("%H:%M") %></td>
+        <td><%= an_event.name %></td>
+        <td><%= an_event.location %></td>
+        <td><a href="/events/<%= an_event.id %>">Event detail</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

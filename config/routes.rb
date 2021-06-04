@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # Homepage
-  get("/",{:controller => "user_authentication", :action => "sign_up_form"})
+  get("/",{:controller => "user_authentication", :action => "sign_in_form"})
 
   # Routes for the Participant resource:
 
@@ -9,10 +9,8 @@ Rails.application.routes.draw do
   post("/insert_participant", { :controller => "participants", :action => "create" })
           
   # READ
-  get("/participants", { :controller => "participants", :action => "index" })
-  
-  get("/participants/:path_id", { :controller => "participants", :action => "show" })
-  
+  get("/participants", { :controller => "participants", :action => "user_events" })
+    
   # UPDATE
   
   post("/modify_participant/:path_id", { :controller => "participants", :action => "update" })
@@ -25,13 +23,19 @@ Rails.application.routes.draw do
   # Routes for the Event resource:
 
   # CREATE
+  
+  get("/new_event", { :controller => "events", :action => "new_event_form"})
+  
   post("/insert_event", { :controller => "events", :action => "create" })
           
   # READ
-  get("/events", { :controller => "events", :action => "index" })
+
+  get("/events", { :controller => "events", :action => "calendar" })
+
+  get("/events/:path_id", { :controller => "events", :action => "detail" })
   
-  get("/events/:path_id", { :controller => "events", :action => "show" })
-  
+  get("/events/:path_id/modify", { :controller => "events", :action => "edit_form" })
+
   # UPDATE
   
   post("/modify_event/:path_id", { :controller => "events", :action => "update" })

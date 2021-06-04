@@ -1,20 +1,25 @@
 class EventsController < ApplicationController
-  def index
+  
+  def calendar
     matching_events = Event.all
 
     @list_of_events = matching_events.order({ :time => :desc })
 
-    render({ :template => "events/index.html.erb" })
+    render({ :template => "events/event_calendar.html.erb" })
   end
 
-  def show
+  def detail
     the_id = params.fetch("path_id")
 
     matching_events = Event.where({ :id => the_id })
 
     @the_event = matching_events.at(0)
 
-    render({ :template => "events/show.html.erb" })
+    render({ :template => "events/event_detail.html.erb" })
+  end
+
+  def new_event_form
+    render({ :template => "events/event_new_form.html.erb" })
   end
 
   def create
@@ -31,6 +36,13 @@ class EventsController < ApplicationController
     else
       redirect_to("/events", { :notice => "Event failed to create successfully." })
     end
+  end
+
+  def edit_form
+    the_id = params.fetch("path_id")
+    @the_event = Event.where({ :id => the_id }).at(0)
+    
+    render({ :template => "events/event_edit_form.html.erb" })
   end
 
   def update

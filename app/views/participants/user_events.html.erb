@@ -1,0 +1,82 @@
+<h1><b>Your Events</b></h1>
+<hr>
+<div>
+<h2><b>Organizing</b></h2>
+<% @organize_events.each do |organize_event| %>
+  <div class="card mb-3">
+  <h3 class="card-header"><%= organize_event.name %></h3>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="600" aria-label="Placeholder: Image cap" focusable="true" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+    <image href="<%=organize_event.picture%>" x="0" y="0" height="100%" width="100%"/>
+  </svg>
+  <div class="card-body">
+    <p class="card-text"><%= organize_event.description %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Time: <%= organize_event.time.strftime("%D %H:%M")%></li>
+    <li class="list-group-item">Location: <%= organize_event.location%></li>
+  </ul>
+  <div class="card-body">
+      <a href="/delete_event/<%= organize_event.id %>"><button type="submit" class="btn btn-success" id="going">Delete</button></a>
+      <a href="/events/<%= organize_event.id %>/modify"><button type="submit" class="btn btn-success" id="going">Modify</button></a>
+  <div class="card-footer text-muted">Created at <%= time_ago_in_words(organize_event.created_at) %> ago, updated at <%= time_ago_in_words(organize_event.updated_at) %> ago</div>
+<% end %>
+</div>
+<hr>
+
+<div>
+<h2><b>Attending</b></h2>
+<% @going_events.each do |going_event| %>
+  <div class="card mb-3">
+  <h3 class="card-header"><%= going_event.name %></h3>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="600" aria-label="Placeholder: Image cap" focusable="true" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+    <image href="<%=going_event.picture%>" x="0" y="0" height="100%" width="100%"/>
+  </svg>
+  <div class="card-body">
+    <p class="card-text"><%= going_event.description %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Time: <%= going_event.time.strftime("%D %H:%M")%></li>
+    <li class="list-group-item">Location: <%= going_event.location%></li>
+  </ul>
+  <div class="card-body">
+    <form action="/modify_participant/<%= going_event.id %>" method="post">
+      <div class="form-group">  
+        <input type="hidden" id="commitment" name="query_commitment" value="Interested">
+      </div>
+      <button type="submit" class="btn btn-success" id="commitment">Interested</button></a>
+    </form>
+    <a href="/delete_participant/<%= going_event.id %>"><button type="button" class="btn btn-success">Not Going</button></a>
+  </div>
+  <div class="card-footer text-muted">Created at <%= time_ago_in_words(going_event.created_at) %> ago, updated at <%= time_ago_in_words(going_event.updated_at) %> ago</div>
+<% end %>
+</div>
+<hr>
+
+<div>
+<h2><b>Interested In</b></h2>
+<% @interested_events.each do |interested_event| %>
+  <div class="card mb-3">
+  <h3 class="card-header"><%= interested_event.name %></h3>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="600" aria-label="Placeholder: Image cap" focusable="true" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+    <image href="<%=interested_event.picture%>" x="0" y="0" height="100%" width="100%"/>
+  </svg>
+  <div class="card-body">
+    <p class="card-text"><%= interested_event.description %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Time: <%= interested_event.time.strftime("%D %H:%M")%></li>
+    <li class="list-group-item">Location: <%= interested_event.location%></li>
+  </ul>
+  <div class="card-body">
+    <form action="/modify_participant/<%= interested_event.id %>" method="post">
+      <div class="form-group">  
+        <input type="hidden" name="query_commitment" id="commitment" value="Going">
+      </div>
+      <button type="submit" class="btn btn-success" id="commitment">Going</button></a>
+    </form>
+    <a href="/delete_participant/<%= interested_event.id %>"><button type="button" class="btn btn-success" >Not Interested</button></a>
+  </div>
+  <div class="card-footer text-muted">Created at <%= time_ago_in_words(interested_event.created_at) %> ago, updated at <%= time_ago_in_words(interested_event.updated_at) %> ago</div>
+<% end %>
+</div>
+<hr>

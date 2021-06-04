@@ -1,0 +1,44 @@
+<h1><b>Edit event</b></h1>
+
+<form action="/modify_event/<%= @the_event.id %>"  method="post" >
+
+<div class="form-group row">
+    <div class="form-group col-md-4">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="query_name" value="<%= @the_event.name %>">
+    </div>
+    <div class="form-group col-md-4">
+    <label for="time">Time</label>
+    <input type="datetime-local" class="form-control" id="time" name="query_time" value="<%= @the_event.time %>">
+    </div>
+</div>
+<div class="form-group row">
+    <div class="form-group col-md-4">
+    <label for="name">Location</label>
+    <input type="text" class="form-control" id="location" name="query_location" value="<%= @the_event.location %>">
+    </div>
+    <div class="form-group col-md-4">
+    <label for="picture">Picture</label>
+    <input type="text" class="form-control" id="picture" name="query_picture" value="<%= @the_event.picture %>"
+    </div>
+</div>
+
+<div class="form-group col-md-8">
+    <label for="description">Description</label>
+    <textarea class="form-control" row=3 id="description" name="query_description" value="<%= @the_event.description %>"></textarea>
+</div>
+
+<div class="form-group">
+    <input type="hidden" class="form-control" id="organizer" name="query_organizer" value="<%=@current_user.first_name%> <%=@current_user.last_name%>">
+</div>
+
+<div class="form-group">
+    <input type="hidden" class="form-control" id="organizer_id" name="query_organizer_id" value="<%=@current_user.id%>">
+</div>
+
+<br>
+
+<div class="form-group col-md-2">
+    <button type="submit" class="btn btn-primary">Edit event</button>
+</div>
+</form>
