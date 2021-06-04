@@ -5,7 +5,7 @@ class ParticipantsController < ApplicationController
     @the_event = Event.where({:id => the_id}).at(0)
 
     matching_participants = Participant.where({:event_id => the_id})
-    @list_of_participants = matching_participants.order({:commitment => :desc}).order({ :created_at => :desc })
+    @list_of_participants = matching_participants.order({:commitment => :asc}).order({ :created_at => :desc })
 
     render({ :template => "participants/event_attendance.html.erb" })
   end
