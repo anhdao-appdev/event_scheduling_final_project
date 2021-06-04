@@ -1,28 +1,21 @@
-<h1><b>Events Calendar</b></h1>
-
-<hr>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Date</th>
-      <th scope="col">Hour</th>
-      <th scope="col">Event Name</th>
-      <th scope="col">Event Location</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @list_of_events.each do |an_event| %>
-      <tr class="table-dark">
-        <td><%= an_event.id %></td>
-        <td><%= an_event.time.strftime("%D") %></td>
-        <td><%= an_event.time.strftime("%H:%M") %></td>
-        <td><%= an_event.name %></td>
-        <td><%= an_event.location %></td>
-        <td><a href="/events/<%= an_event.id %>">Event detail</a></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <h1><b>Events Calendar</b></h1>
+  <hr>
+  <% @list_of_events.each do |an_event| %>
+    <div class="row row-striped">
+    <div class="col-2 text-right">
+      <h1 class="display-4"><span class="badge bg-primary"><%=an_event.time.strftime("%d")%></span></h1>
+      <h2 class="text-uppercase"><%=an_event.time.strftime("%b")%></h2>
+    </div>
+    <div class="col-10">
+      <a href="/events/<%= an_event.id %>"><h3 class="text-uppercase"><strong><%=an_event.name%></strong></h3></a>
+      <ul class="list-inline">
+        <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <%=an_event.time.strftime("%A")%></li>
+        <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> <%=an_event.time.strftime("%H:%M")%></li>
+        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> <%=an_event.location %></li>
+      </ul>
+      <p><%= an_event.description %></p>
+    </div>
+    <hr>
+  <% end %>
+</div>
