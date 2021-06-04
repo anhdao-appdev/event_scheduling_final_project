@@ -71,8 +71,7 @@ class UserAuthenticationController < ApplicationController
     
     if @user.valid?
       @user.save
-
-      redirect_to("/", { :notice => "User account updated successfully."})
+      redirect_to("/user_events", { :notice => "User account updated successfully."})
     else
       render({ :template => "user_authentication/edit_profile_with_errors.html.erb" })
     end
