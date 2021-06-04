@@ -37,29 +37,29 @@ class ParticipantsController < ApplicationController
         redirect_to("/user_events", { :notice => "You have successfully expressed interest for this event!" })
       end
       else
-      redirect_to("/user_events", { :notice => "Your event registration failed!" })
+      redirect_to("/user_events", { :notice => "Your event registration failed." })
     end
   end
 
   def update
     the_id = params.fetch("path_id")
-    the_participant = Participant.where({ :id => the_id }).at(0)
+    the_participant = Participant.where({ :event_id => the_id }).where({:member_id => @current_user.id}).at(0)
     the_participant.commitment = params.fetch("query_commitment")
 
     if the_participant.valid?
       the_participant.save
-      redirect_to("/user_events/#{the_participant.id}", { :notice => "Participant updated successfully."} )
+      redirect_to("/user_events", { :notice => "You have successfully updated your status for this event."} )
     else
-      redirect_to("/user_events/#{the_participant.id}", { :alert => "Participant failed to update successfully." })
+      redirect_to("/user_events", { :alert => "Your attempt to change your status for this event was unsuccesful." })
     end
   end
 
   def destroy
     the_id = params.fetch("path_id")
-    the_participant = Participant.where({ :id => the_id }).at(0)
+    the_participant = Participant.where({ :event_id => the_id }).where({:member_id => @current_user.id}).at(0)
 
     the_participant.destroy
 
-    redirect_to("/user_events", { :notice => "Participant deleted successfully."} )
+    redirect_to("/user_events", { :notice => "You have successfully withdrawn from this event."} )
   end
 end
