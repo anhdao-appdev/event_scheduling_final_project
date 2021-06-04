@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  # Homepage
+  # HOMEPAGE REDIRECT
   get("/",{:controller => "user_authentication", :action => "sign_in_form"})
 
   # Routes for the Participant resource:
@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   post("/insert_participant", { :controller => "participants", :action => "create" })
           
   # READ
-  get("/participants", { :controller => "participants", :action => "user_events" })
-    
+  get("/user_events", { :controller => "participants", :action => "user_events" })
+  
+  get("/user_events/rsvp/:path_id", { :controller => "participants", :action => "attendance" })
+
   # UPDATE
   
   post("/modify_participant/:path_id", { :controller => "participants", :action => "update" })

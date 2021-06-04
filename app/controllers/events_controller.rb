@@ -13,10 +13,10 @@ class EventsController < ApplicationController
     matching_events = Event.where({ :id => the_id })
     @the_event = matching_events.at(0)
 
-    matching_participants = Participant.where({:event_id => @the_event.id}).where(:member_id => @current_user.id)
+    matching_participants = Participant.where({:event_id => @the_event.id}).where({:member_id => @current_user.id})
     @the_participant = matching_participants.at(0)
 
-    matching_organizers = Participant.where({:event_id => @the_event.id}).where(:organizer_id => @current_user.id)
+    matching_organizers = Event.where({:id => @the_event.id}).where({:organizer_id => @current_user.id})
     @the_organizer = matching_organizers.at(0)
 
     render({ :template => "events/event_detail.html.erb" })

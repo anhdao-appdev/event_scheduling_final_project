@@ -1,11 +1,10 @@
 <div class="container">
-<h1><b>Your Events</b></h1>
-<hr>
+
 <div>
   <h2><b>Organizing</b></h2>
   <% @organize_events.each do |organize_event| %>
     <div class="card mb-3">
-      <h3 class="card-header"><%= organize_event.name %></h3>
+      <h3 class="card-header text-uppercase"><b><u><%= organize_event.name %></b></u></h3>
       <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="400" aria-label="Placeholder: Image cap" focusable="true" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
         <image href="<%=organize_event.picture%>" x="0" y="0" height="100%" width="100%"/>
       </svg>
@@ -25,6 +24,9 @@
         <div class="col-1">
           <a href="/events/<%= organize_event.id %>/modify"><button type="submit" class="btn btn-success" id="going">Modify</button></a>
         </div>
+        <div class="col-2">
+          <a href="/user_events/rsvp/<%= organize_event.id %>"><button type="submit" class="btn btn-success" id="going">RSVP List</button></a>
+        </div>
       </div>
       <div class="card-footer text-muted">Created at <%= time_ago_in_words(organize_event.created_at) %> ago, updated at <%= time_ago_in_words(organize_event.updated_at) %> ago</div>
     </div>
@@ -36,7 +38,7 @@
 <h2><b>Attending</b></h2>
 <% @going_events.each do |going_event| %>
   <div class="card mb-3">
-  <h3 class="card-header"><%= going_event.name %></h3>
+  <h3 class="card-header text-uppercase"><b><u><%= going_event.name %></b></u></h3>
   <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="400" aria-label="Placeholder: Image cap" focusable="true" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
     <image href="<%=going_event.picture%>" x="0" y="0" height="100%" width="100%"/>
   </svg>
@@ -70,7 +72,7 @@
 <h2><b>Interested In</b></h2>
 <% @interested_events.each do |interested_event| %>
   <div class="card mb-3">
-  <h3 class="card-header"><%= interested_event.name %></h3>
+  <h3 class="card-header text-uppercase"><b><u><%= interested_event.name %></b></u></h3>
   <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="400" aria-label="Placeholder: Image cap" focusable="true" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
     <image href="<%=interested_event.picture%>" x="0" y="0" height="100%" width="100%"/>
   </svg>

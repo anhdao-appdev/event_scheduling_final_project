@@ -1,0 +1,31 @@
+<h1 class="text-uppercase"><b><u><%=@the_event.name%></b></u> - RSVP List</h1>
+<h5><ul class="list-inline">
+    <li class="list-inline-item"><i><i class="fa fa-check-circle-o" aria-hidden="true"></i><%=@list_of_participants.where({:commitment=>"Going"}).count%> Going</i></li>
+    <li class="list-inline-item"><i><i class="fa fa-star-o" aria-hidden="true"></i><%=@list_of_participants.where({:commitment=>"Interested"}).count%> Interested</i></li>
+</ul></h5>
+<hr>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Year</th>
+      <th scope="col">Venmo</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @list_of_participants.each do |a_participant| %>
+        <% a_user = User.where({:id => a_participant.member_id}).at(0) %>
+        <tr class="table-dark">
+            <td><%= a_user.first_name %></td>
+            <td><%= a_user.last_name %></td>
+            <td><%= a_user.email %></td>
+            <td><%= a_user.year %></td>
+            <td><%= a_user.venmo %></td>
+            <td><%= a_participant.commitment %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

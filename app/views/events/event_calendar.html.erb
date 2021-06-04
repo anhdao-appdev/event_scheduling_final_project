@@ -15,6 +15,11 @@
         <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> <%=an_event.location %></li>
       </ul>
       <p><%= an_event.description %></p>
+      <% rsvp_list = Participant.where({:event_id => an_event.id})%>
+      <ul class="list-inline">
+        <li class="list-inline-item"><b><i class="fa fa-check-circle-o" aria-hidden="true"></i> <%=rsvp_list.where({:commitment => "Going"}).count%> Going </b></li>
+        <li class="list-inline-item"><b><i class="fa fa-star-o" aria-hidden="true"></i> <%=rsvp_list.where({:commitment => "Interested"}).count%> Interested </b></li>
+      </ul>
     </div>
     <hr>
   <% end %>

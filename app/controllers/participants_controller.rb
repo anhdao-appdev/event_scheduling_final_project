@@ -1,12 +1,14 @@
 class ParticipantsController < ApplicationController
 
-  # def index
-  #   matching_participants = Participant.all
+  def attendance
+    the_id = params.fetch("path_id")
+    @the_event = Event.where({:id => the_id}).at(0)
 
-  #   @list_of_participants = matching_participants.order({ :created_at => :desc })
+    matching_participants = Participant.where({:event_id => the_id})
+    @list_of_participants = matching_participants.order({:commitment => :desc}).order({ :created_at => :desc })
 
-  #   render({ :template => "participants/index.html.erb" })
-  # end
+    render({ :template => "participants/event_attendance.html.erb" })
+  end
 
   def user_events
     the_id = @current_user.id
@@ -30,12 +32,12 @@ class ParticipantsController < ApplicationController
     if the_participant.valid?
       the_participant.save
       if the_participant.commitment == "Going"
-        redirect_to("/participants", { :notice => "You have successfully registered for this event!" })
+        redirect_to("/user_events", { :notice => "You have successfully registered for this event!" })
       else
-        redirect_to("/participants", { :notice => "You have successfully expressed interest for this event!" })
+        redirect_to("/user_events", { :notice => "You have successfully expressed interest for this event!" })
       end
       else
-      redirect_to("/participants", { :notice => "Your event registration failed!" })
+      redirect_to("/user_events", { :notice => "Your event registration failed!" })
     end
   end
 
@@ -46,9 +48,9 @@ class ParticipantsController < ApplicationController
 
     if the_participant.valid?
       the_participant.save
-      redirect_to("/participants/#{the_participant.id}", { :notice => "Participant updated successfully."} )
+      redirect_to("/user_events/#{the_participant.id}", { :notice => "Participant updated successfully."} )
     else
-      redirect_to("/participants/#{the_participant.id}", { :alert => "Participant failed to update successfully." })
+      redirect_to("/user_events/#{the_participant.id}", { :alert => "Participant failed to update successfully." })
     end
   end
 
@@ -58,6 +60,6 @@ class ParticipantsController < ApplicationController
 
     the_participant.destroy
 
-    redirect_to("/participants", { :notice => "Participant deleted successfully."} )
+    redirect_to("/user_events", { :notice => "Participant deleted successfully."} )
   end
 end
