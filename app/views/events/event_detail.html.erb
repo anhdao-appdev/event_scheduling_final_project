@@ -8,7 +8,7 @@
   <p class="card-text"><%=@the_event.description %></p>
 </div>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">Organizer: <%=@the_event.organizer%></li>
+  <li id="<%= dom_id(event.participant_id) %>_<%= dom_id(event) %>" class="list-group-item">Organizer: <%=@the_event.organizer%></li>
   <li class="list-group-item">Time: <%=@the_event.time.strftime("%D %H:%M")%></li>
   <li class="list-group-item">Location: <%=@the_event.location%></li>
 </ul>

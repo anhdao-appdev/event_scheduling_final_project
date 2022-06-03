@@ -45,6 +45,10 @@ class ParticipantsController < ApplicationController
     the_id = params.fetch("path_id")
     the_participant = Participant.where({ :event_id => the_id }).where({:member_id => @current_user.id}).at(0)
     the_participant.commitment = params.fetch("query_commitment")
+    
+    respond_to do |format|
+      format.js{render template: "events/update.js.erb"}
+    end
 
     if the_participant.valid?
       the_participant.save
