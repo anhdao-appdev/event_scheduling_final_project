@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   # HOMEPAGE REDIRECT
   get("/",{:controller => "user_authentication", :action => "sign_in_form"})
 
